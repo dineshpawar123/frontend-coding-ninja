@@ -1,17 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 import { useState, useEffect, useMemo } from "react";
 
@@ -52,6 +38,22 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 // Images
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
+
+import React from 'react';
+// import './App.css';
+import store from './redux/store'
+import { Provider } from 'react-redux'
+import ProductData from './components/productData'
+import LoginPage from './components/loginPage'
+import CartProduct from './components/cartProduct'
+
+import {
+  BrowserRouter as Router,
+  // Route,
+  // Switch
+} from 'react-router-dom';
+
+
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -145,34 +147,36 @@ export default function App() {
       </Icon>
     </MDBox>
   );
-
-  return direction === "rtl" ? (
-    <CacheProvider value={rtlCache}>
-      <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
-        <CssBaseline />
-        {layout === "dashboard" && (
-          <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Material Dashboard 2"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
-            <Configurator />
-            {configsButton}
-          </>
-        )}
-        {layout === "vr" && <Configurator />}
-        <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
-        </Routes>
-      </ThemeProvider>
-    </CacheProvider>
-  ) : (
-    <ThemeProvider theme={darkMode ? themeDark : theme}>
+ 
+  // return 
+  // direction === 
+  // "rtl" ? (
+  //   <CacheProvider value={rtlCache}>
+  //     <ThemeProvider theme={darkMode ? themeDarkRTL : themeRTL}>
+  //       <CssBaseline />
+  //       {layout === "dashboard" && (
+  //         <>
+  //           <Sidenav
+  //             color={sidenavColor}
+  //             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+  //             brandName="Material Dashboard 2"
+  //             routes={routes}
+  //             onMouseEnter={handleOnMouseEnter}
+  //             onMouseLeave={handleOnMouseLeave}
+  //           />
+  //           <Configurator />
+  //           {configsButton}
+  //         </>
+  //       )}
+  //       {layout === "vr" && <Configurator />}
+  //       <Routes>
+  //         {getRoutes(routes)}
+  //         <Route path="*" element={<Navigate to="/dashboard" />} />
+  //       </Routes>
+  //     </ThemeProvider>
+  //   </CacheProvider>
+  // ) : (
+    return <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
       {layout === "dashboard" && (
         <>
@@ -191,8 +195,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </ThemeProvider>
-  );
+  // );
 }

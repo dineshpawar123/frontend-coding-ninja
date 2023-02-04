@@ -16,16 +16,32 @@ Coded by www.creative-tim.com
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import {
+  // BrowserRouter as Router,
+  Route,
+  Routes,
+  Switch
+} from 'react-router-dom';
 import App from "App";
 
 // Material Dashboard 2 React Context Provider
 import { MaterialUIControllerProvider } from "context";
+import { Provider } from 'react-redux';
+import store from './redux/store'
+import {RoutesComponents} from './routesComponents'
+// import { Provider } from 'react-redux'
+import ProductData from './components/productData'
+import LoginPage from './components/loginPage'
+import CartProduct from './components/cartProduct'
 
 ReactDOM.render(
+  <Provider store={store}>
   <BrowserRouter>
+  <RoutesComponents/>
     <MaterialUIControllerProvider>
       <App />
     </MaterialUIControllerProvider>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );

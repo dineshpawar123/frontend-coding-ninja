@@ -40,11 +40,35 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import { Signup } from "axios/auth";
+
 
 function Basic() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+
+  const [signInState, setSignInState] = useState({
+    email: '',
+    password: '',
+  })
+
+  const handleChange = (e) => {
+    let { name, value } = e.target;
+    setSignInState((preVal) => ({
+      ...preVal,
+      [name]: value
+    }))
+  }
+const handleSignInSubmit = () => {
+    Signup(signInState).then((res) => {
+      console.log("Response", res);
+    }).catch((err) => {
+      console.log("Error : ", err);
+    })
+  }
+
+
 
   return (
     <BasicLayout image={bgImage}>
@@ -63,7 +87,7 @@ function Basic() {
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
             Sign in
           </MDTypography>
-          <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+          {/* <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
             <Grid item xs={2}>
               <MDTypography component={MuiLink} href="#" variant="body1" color="white">
                 <FacebookIcon color="inherit" />
@@ -79,17 +103,19 @@ function Basic() {
                 <GoogleIcon color="inherit" />
               </MDTypography>
             </Grid>
-          </Grid>
+          </Grid> */}
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form">
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" fullWidth />
+              <MDInput type="email" label="Email" name="email" fullWidth onChange={(e) => handleChange(e)} />
+
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" fullWidth />
+            <MDInput type="password" label="Password" name="password" fullWidth onChange={(e) => handleChange(e)} />
+
             </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
+            {/* <MDBox display="flex" alignItems="center" ml={-1}>
               <Switch checked={rememberMe} onChange={handleSetRememberMe} />
               <MDTypography
                 variant="button"
@@ -100,9 +126,10 @@ function Basic() {
               >
                 &nbsp;&nbsp;Remember me
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
+            <MDButton variant="gradient" color="info" fullWidth onClick={() => handleSignInSubmit()}>
+
                 sign in
               </MDButton>
             </MDBox>
